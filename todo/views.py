@@ -63,7 +63,9 @@ class TodoUpdateView(generics.UpdateAPIView):
 
     def get_object(self):
         # Ambil todo berdasarkan id dan pastikan user adalah pemiliknya
+        # print(">>", vars(self.request.user), "<<")
         todo = super().get_object()
+        # print(">>", vars(todo), "<<")
         if todo.created_by != self.request.user:
             raise PermissionDenied("You do not have permission to update this todo.")
         return todo
