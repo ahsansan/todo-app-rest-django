@@ -67,3 +67,15 @@ class TodoUpdateView(generics.UpdateAPIView):
         if todo.created_by != self.request.user:
             raise PermissionDenied("You do not have permission to update this todo.")
         return todo
+
+# View untuk delete data
+class TodoDeleteView(generics.DestroyAPIView):
+    queryset = Todo.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        # Ambil todo berdasarkan id dan pastikan user adalah pemiliknya
+        todo = super().get_object()
+        if todo.created_by != self.request.user:
+            raise PermissionDenied("You do not have permission to delete this todo.")
+        return todo
