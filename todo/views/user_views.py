@@ -12,11 +12,11 @@ def RegisterView(request):
     serializer = RegisterSerializer(data=request.data)
 
     if not serializer.is_valid():
-            return Response({
-                'success': False,
-                'message': 'Data tidak valid',
-                'errors': serializer.errors
-            }, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'success': False,
+            'message': 'Data tidak valid',
+            'errors': serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
     
     email = serializer.validated_data.get('email')
     username = serializer.validated_data.get('username')
